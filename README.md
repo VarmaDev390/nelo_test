@@ -101,6 +101,26 @@ client/
 └── package.json       # Project dependencies and scripts
 ```
 
+## Screenshots
+
+Here are some screenshots of the application:
+
+### Login
+
+![Login](assets/login.png)
+
+### New Post
+
+![New Post](assets/newpost.png)
+
+### Posts
+
+![Posts](assets/posts.png)
+
+### Register
+
+![Register](assets/register.png)
+
 # Nelo Test - Server Application
 
 This is the backend server for the Nelo Test project, built with Node.js and Express. It provides a RESTful API for the client application to interact with, handling user authentication and data persistence with MongoDB.
