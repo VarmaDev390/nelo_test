@@ -1,8 +1,12 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import logger from "./src/utils/logger.js";
+import passport from "passport";
 import connectDB from "./db.js";
+import logger from "./src/utils/logger.js";
+import authRoutes from "./src/routes/authentication.js";
+import postRoutes from "./src/routes/posts.js";
+import "./src/config/passport.js";
 
 dotenv.config();
 
@@ -12,6 +16,11 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 app.use(cors());
+app.use(passport.initialize());
+
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/post", postRoutes);
 
 // test route
 app.get("/", (req, res) => {
