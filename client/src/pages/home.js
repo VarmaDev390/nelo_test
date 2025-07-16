@@ -76,7 +76,7 @@ export default function Home({ navigation }) {
       showSnackbar("No more posts to load.");
     } else if (!loading) {
       setRefreshing(true); // Set refreshing to true *before* fetching
-      fetchPosts(1); // Fetch from the beginning on refresh
+      fetchPosts(page + 1, true); // Fetch from the beginning on refresh
     }
   }, [page, totalPages, loading]);
 
