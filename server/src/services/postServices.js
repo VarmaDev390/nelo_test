@@ -2,7 +2,7 @@ import Post from "../models/posts.js";
 import logger from "../utils/logger.js";
 
 export class PostService {
-  static async getPosts({ page = 1, limit = 10 }) {
+  static async getPosts({ page = 1, limit = 5 }) {
     try {
       const skip = (page - 1) * limit;
       const posts = await Post.find()

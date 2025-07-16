@@ -1,6 +1,7 @@
 import passport from "passport";
 import logger from "../utils/logger.js";
 import { generateAccessToken } from "../utils/jwt.js";
+import { AuthService } from "../services/authServices.js";
 
 export class AuthController {
   static registerUser(req, res, next) {
@@ -19,8 +20,13 @@ export class AuthController {
             .status(400)
             .json({ message: info.message || "Registration failed." });
         }
+        // Generate JWT upon successful registration
+        const payload = { id: user.id, email: user.email };
+        const token = generateAccessToken(payload);
+
         return res.status(201).json({
           message: "User registered successfully.",
+          token: `Bearer ${token}`,
           user: { id: user.id, name: user.name, email: user.email },
         });
       }
@@ -58,8 +64,16 @@ export class AuthController {
     )(req, res, next);
   }
 
-  static async logOutUser() {
+  static async logOutUser(req, res, next) {
     try {
-    } catch {}
+      const result = await AuthService.logoutUser();
+      logger.info("User logout acknowledged.");
+      return res.status(200).json(result); // explicitly sending the response
+    } catch (error) {
+      logger.error(`Logout Controller Error: ${error.message}`);
+      return res
+        .status(500)
+        .json({ message: "An internal server error occurred." });
+    }
   }
 }

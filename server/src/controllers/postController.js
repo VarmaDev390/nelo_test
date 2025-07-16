@@ -5,7 +5,7 @@ export class PostController {
   static async getPosts(req, res, next) {
     // logger.info(`inside PostController.getPosts`);
     try {
-      const { page = 1, limit = 10 } = req.query;
+      const { page = 1, limit = 5 } = req.query;
       const data = await PostService.getPosts({
         page: parseInt(page, 10),
         limit: parseInt(limit, 10),

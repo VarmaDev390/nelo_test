@@ -51,4 +51,9 @@ export class AuthService {
       throw error;
     }
   }
+
+  static async logoutUser() {
+    logger.info("Inside Logout service ");
+    return { success: true, message: "Logged out at server" };
+  }
 }
